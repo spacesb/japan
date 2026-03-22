@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Is Japan The Way It Is?</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --font: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+    --red: #C1121F;
+    --ink: #1a1a1a;
+    --muted: #999;
+  }
+
+  body { font-family: var(--font); font-size: 11px; color: var(--ink); background: #fff; }
+
+  /* HERO */
+  .hero {
+    border-bottom: 2px solid var(--ink);
+    padding: 28px 28px 24px;
+    display: grid;
+    grid-template-columns: 1fr 88px;
+    gap: 28px;
+    align-items: end;
+  }
+  .hero-label { font-size: 8px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
+  h1 { font-size: 34px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; text-transform: uppercase; }
+  .hero-desc { font-size: 11px; line-height: 1.75; color: #555; margin-top: 13px; }
+  .wa-box { width: 88px; height: 88px; border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; font-size: 42px; flex-shrink: 0; }
+
+  /* TABS */
+  .tabs { border-bottom: 2px solid var(--ink); display: flex; }
+  .tab {
+    background: transparent; color: var(--ink); border: none; border-right: 1px solid var(--ink);
+    padding: 10px 16px; cursor: pointer; font-family: var(--font); font-size: 9px; font-weight: 700;
+    letter-spacing: 0.07em; text-transform: uppercase;
+  }
+  .tab.active { background: var(--ink); color: #fff; }
+  .tab:hover:not(.active) { background: #f5f5f5; }
+
+  /* PANELS */
+  .panel { display: none; padding: 24px 28px 36px; }
+  .panel.active { display: block; }
+
+  .phase-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2px; }
+  .phase-title { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase; }
+  .phase-time { font-size: 9px; color: var(--red); letter-spacing: 0.07em; font-weight: 700; }
+  .phase-subtitle { font-size: 8px; color: var(--muted); letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 12px; }
+  .phase-desc { font-size: 11px; line-height: 1.8; color: #444; margin-bottom: 20px; }
+
+  /* RESOURCES */
+  .resources-label { font-size: 8px; letter-spacing: 0.1em; color: #bbb; text-transform: uppercase; }
+  .resource { border-top: 1px solid var(--ink); padding: 10px 0; cursor: pointer; }
+  .resource-row { display: flex; align-items: flex-start; gap: 10px; }
+  .resource-num { font-size: 9px; color: #bbb; padding-top: 1px; width: 15px; flex-shrink: 0; }
+  .resource-body { flex: 1; }
+  .resource-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .resource-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .tag { font-size: 7.5px; font-weight: 700; letter-spacing: 0.09em; padding: 1px 4px; border: 1px solid; flex-shrink: 0; }
+  .tag-video { color: var(--red); border-color: var(--red); }
+  .tag-read  { color: var(--ink); border-color: var(--ink); }
+  .tag-web   { color: var(--red); border-color: var(--red); }
+  .resource-title { font-size: 11px; font-weight: 700; }
+  .resource-time { font-size: 9px; color: var(--muted); white-space: nowrap; padding-top: 1px; }
+  .resource-source { font-size: 9px; color: var(--muted); margin-top: 2px; }
+  .resource-why { display: none; margin-top: 8px; }
+  .resource-why p { font-size: 10.5px; line-height: 1.7; color: #555; margin-bottom: 6px; }
+  .resource-why a { font-size: 9px; color: var(--red); text-decoration: none; font-weight: 700; letter-spacing: 0.03em; }
+  .resource-why a:hover { text-decoration: underline; }
+  .resource-divider { border-top: 1px solid var(--ink); }
+
+  /* BUTTONS */
+  .nav-buttons { display: flex; justify-content: space-between; }
+  .btn { background: none; border: 1px solid var(--ink); padding: 8px 16px; font-family: var(--font); font-size: 9px; font-weight: 700; cursor: pointer; letter-spacing: 0.06em; }
+  .btn:hover { background: #f5f5f5; }
+  .btn.primary { background: var(--ink); color: #fff; }
+  .btn.primary:hover { background: #333; }
+  .btn:disabled { opacity: 0.15; cursor: not-allowed; }
+  .btn:disabled:hover { background: none; }
+
+  /* CONTAINER */
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* DISCUSSION */
+  .disc-label { font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 8px; }
+  .disc-title { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase; margin-bottom: 5px; }
+  .disc-sub { font-size: 10px; color: var(--muted); line-height: 1.6; margin-bottom: 18px; }
+  .disc-prompt { border-left: 3px solid var(--ink); padding-left: 16px; margin-bottom: 22px; }
+  .disc-prompt p { font-size: 11px; line-height: 1.85; color: var(--ink); }
+  .disc-prompt p + p { margin-top: 12px; }
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid var(--ink); margin-bottom: 22px; }
+  .tip { padding: 14px 15px; border-right: 1px solid var(--ink); }
+  .tip:last-child { border-right: none; }
+  .tip-num { font-size: 8px; color: var(--red); font-weight: 700; letter-spacing: 0.07em; margin-bottom: 5px; }
+  .tip p { font-size: 10px; line-height: 1.65; color: #555; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-label">Independent learning curriculum</div>
+    <h1>WHY IS<br>JAPAN THE<br>WAY IT IS?</h1>
+    <p class="hero-desc">
+      Everything flows from one concept: <strong>wa (和)</strong>, group harmony.
+      Install this first. Tatemae, omotenashi, ma, shoganai. All downstream of it.
+    </p>
+  </div>
+  <div class="wa-box">和</div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="switchTab(0)">01&nbsp;&nbsp;Core Mental Model</button>
+  <button class="tab" onclick="switchTab(1)">02&nbsp;&nbsp;Society in Practice</button>
+  <button class="tab" onclick="switchTab(2)">03&nbsp;&nbsp;Your Trip</button>
+  <button class="tab" onclick="switchTab(3)">04&nbsp;&nbsp;Discussion</button>
+</div>
+
+<!-- PANEL 01 -->
+<div class="panel active" id="panel-0">
+  <div class="phase-header">
+    <div class="phase-title">The Core Mental Model</div>
+    <div class="phase-time">50-70 MIN</div>
+  </div>
+  <div class="phase-subtitle">Why Japan is the way it is</div>
+  <p class="phase-desc">Japan's entire social fabric flows from wa (和): group harmony. Layer on tatemae vs honne (public face vs private feelings), shoganai (radical acceptance of what can't change), and omotenashi (hospitality that anticipates needs before they're expressed). You're not learning trivia. You're installing a lens.</p>
+
+  <div class="resources-label">Resources — click to expand</div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">01</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-video">▶ VIDEO</span><span class="resource-title">Why Japan's Geography Sucks</span></div>
+          <span class="resource-time">~15 min</span>
+        </div>
+        <div class="resource-why">
+          <p>Start here. 85% of Japan is uninhabitable mountain range. The tiny flat plains where everyone had to cooperate to grow rice? That's where wa comes from. Geography didn't just shape Japan. It manufactured the culture.</p>
+          <a href="https://www.youtube.com/watch?v=6MsPEyfuicw" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">02</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-video">▶ VIDEO</span><span class="resource-title">Living in Japan: Culture Shock!</span></div>
+          <span class="resource-time">~18 min</span>
+        </div>
+        <div class="resource-why">
+          <p>Chris Broad's most watched video (5.6M views). Tatemae and honne explained by someone who has lived inside the contradiction for years. Funny, honest, and gives you the one concept you need before landing in Japan.</p>
+          <a href="https://www.youtube.com/watch?v=3LS83dDqoGU" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">03</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-read">— READ</span><span class="resource-title">Omotenashi: The Philosophy of Japanese Hospitality</span></div>
+          <span class="resource-time">~8 min</span>
+        </div>
+        <div class="resource-why">
+          <p>Japan explaining itself to you in English. TOKI is a Tokyo based cultural experience platform. Omotenashi isn't 'good service'; it's anticipatory, selfless, and reciprocal. Written from the inside.</p>
+          <a href="https://www.toki.tokyo/blogt/2015/6/24/omotenashi-japanese-serving-philosophy" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource-divider"></div>
+  <div class="nav-buttons">
+    <span></span>
+    <button class="btn primary" onclick="switchTab(1)">NEXT →</button>
+  </div>
+</div>
+
+<!-- PANEL 02 -->
+<div class="panel" id="panel-1">
+  <div class="phase-header">
+    <div class="phase-title">Society in Practice</div>
+    <div class="phase-time">70-90 MIN</div>
+  </div>
+  <div class="phase-subtitle">How those values show up in daily life</div>
+  <p class="phase-desc">Now apply the lens. Japan's paradoxes only make sense once you know wa. The country that invented the bullet train also built izakayas where salarymen silently drink alone. The society that banned street littering has no public bins. These aren't bugs. They're the system working exactly as intended.</p>
+
+  <div class="resources-label">Resources — click to expand</div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">01</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-video">▶ VIDEO</span><span class="resource-title">Tea Ceremony, an Ancient Tradition That Is Still Dear to Japanese</span></div>
+          <span class="resource-time">~28 min</span>
+        </div>
+        <div class="resource-why">
+          <p>The tea ceremony is wa in ritual form. Every gesture — the bow, the turning of the bowl, the silence between movements — is an enactment of the group harmony principle. Watch it as a cultural document, not a curiosity.</p>
+          <a href="https://www.youtube.com/watch?v=LGHmoDvT0e8" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">02</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-video">▶ VIDEO</span><span class="resource-title">Why Japanese Convenience Stores Are So Good</span></div>
+          <span class="resource-time">~15 min</span>
+        </div>
+        <div class="resource-why">
+          <p>The konbini (7-Eleven, Lawson, FamilyMart) is wa in commercial form: perfect execution, zero friction, every need anticipated. The most joyful entry point into how Japanese society functions at ground level.</p>
+          <a href="https://www.youtube.com/watch?v=YwBqS4mK-gk" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">03</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-read">— READ</span><span class="resource-title">A Perspective on the Japanese Concept of Ma</span></div>
+          <span class="resource-time">~10 min</span>
+        </div>
+        <div class="resource-why">
+          <p>Ma (間) is the deliberate use of emptiness in architecture, conversation, food plating, and music. Once you know it, you'll see it everywhere. It's why silence in Japan feels intentional rather than awkward.</p>
+          <a href="https://new.uniquejapan.com/ikebana/ma/" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">04</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-read">— READ</span><span class="resource-title">An Introduction to Washoku: Traditional Japanese Cuisine</span></div>
+          <span class="resource-time">~10 min</span>
+        </div>
+        <div class="resource-why">
+          <p>Japanese food is a ritual expression of wa, seasonality (shun), and craft. The reason ramen broth is simmered for 18 hours isn't just flavor. It's a cultural statement about what effort means.</p>
+          <a href="https://www.toki.tokyo/blogt/2017/2/3/washoku" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource-divider"></div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="switchTab(0)">← PREV</button>
+    <button class="btn primary" onclick="switchTab(2)">NEXT →</button>
+  </div>
+</div>
+
+<!-- PANEL 03 -->
+<div class="panel" id="panel-2">
+  <div class="phase-header">
+    <div class="phase-title">Your Trip Through This Lens</div>
+    <div class="phase-time">50-60 MIN</div>
+  </div>
+  <div class="phase-subtitle">Practical tools and cultural prep</div>
+  <p class="phase-desc">Apply what you've learned. Japan rewards preparation more than almost any destination — not because it's unwelcoming, but because the depth is invisible without context.</p>
+
+  <div class="resources-label">Resources — click to expand</div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">01</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-web">◈ WEB</span><span class="resource-title">Japanese Etiquette Guide</span></div>
+          <span class="resource-time">Open ended</span>
+        </div>
+        <div class="resource-why">
+          <p>A 25 year old community maintained guide to how Japan actually works. Covers inside the house, trains, dining, shrines, gifting. Every rule traces back to wa. You'll keep thinking "oh, that makes sense now."</p>
+          <a href="https://www.japan-guide.com/e/e622.html" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">02</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-web">◈ WEB</span><span class="resource-title">Made in Japan: Crafts and Traditions</span></div>
+          <span class="resource-time">~20 min</span>
+        </div>
+        <div class="resource-why">
+          <p>A curated article covering Japanese crafts being lost and revived — cut glass, textiles, basketweaving. Gives you a feel for wabi-sabi and the Edo period in a way that text alone doesn't.</p>
+          <a href="https://artsandculture.google.com/story/rediscovering-the-lost-crafts-of-japan/vwJSuAbtROi3Jg" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">03</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-video">▶ VIDEO</span><span class="resource-title">15 Tips for First-Time Travellers to Japan</span></div>
+          <span class="resource-time">~20 min</span>
+        </div>
+        <div class="resource-why">
+          <p>Practical prep from someone who has done this many times. Covers the things that catch first-time visitors off guard — etiquette, transport, money, food. Watch this last, after the culture. Context makes the tips land.</p>
+          <a href="https://www.youtube.com/watch?v=00ZXaXIABMY" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource" onclick="toggleResource(this)">
+    <div class="resource-row">
+      <div class="resource-num">04</div>
+      <div class="resource-body">
+        <div class="resource-top">
+          <div class="resource-tags"><span class="tag tag-web">◈ WEB</span><span class="resource-title">Japanese Basics</span></div>
+          <span class="resource-time">~20 min</span>
+        </div>
+        <div class="resource-why">
+          <p>You need 10 to 15 phrases, not fluency. In a culture where effort is a signal of respect, trying matters enormously. A fumbled arigatou gozaimasu lands better than a perfect English thank you.</p>
+          <a href="https://boutiquejapan.com/essential-japanese-words-phrases-for-travelers-to-japan/" target="_blank" onclick="event.stopPropagation()">OPEN LINK →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource-divider"></div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="switchTab(1)">← PREV</button>
+    <button class="btn primary" onclick="switchTab(3)">NEXT →</button>
+  </div>
+</div>
+
+<!-- PANEL 04: DISCUSSION -->
+<div class="panel" id="panel-3">
+  <div class="disc-label">Final discussion: 30-60 min</div>
+  <div class="disc-title">The Case Study Prompt</div>
+  <p class="disc-sub">Prepare independently, then talk. The best discussions end with a real decision you genuinely disagree on.</p>
+
+  <div class="disc-prompt">
+    <p>You're planning Day 4 in Tokyo and Day 8 in Kyoto. Using what you've studied — <em>wa, omotenashi, ma, tatemae/honne</em> — pitch one experience per city that a standard guidebook would miss. Explain what cultural insight makes it worth doing over the obvious choice.</p>
+    <p>Then defend or challenge this: <strong>"As a Western tourist in Japan, you can only ever access a curated performance of Japanese culture. Never the real thing."</strong></p>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip">
+      <div class="tip-num">01</div>
+      <p>Pick a side on the debate. Even if it's not your genuine view. Argue it seriously.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-num">02</div>
+      <p>Bring one thing from your research that genuinely surprised or delighted you.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-num">03</div>
+      <p>End with a real decision: where are you actually going, and why that over the alternative.</p>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="btn" onclick="switchTab(2)">← PREV</button>
+    <button class="btn" disabled style="opacity:0">NEXT →</button>
+  </div>
+</div>
+
+<script>
+  function switchTab(i) {
+    document.querySelectorAll('.tab').forEach((t, j) => t.classList.toggle('active', i === j));
+    document.querySelectorAll('.panel').forEach((p, j) => p.classList.toggle('active', i === j));
+  }
+  function toggleResource(el) {
+    const why = el.querySelector('.resource-why');
+    why.style.display = why.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+</div><!-- /container -->
+</body>
+</html>
