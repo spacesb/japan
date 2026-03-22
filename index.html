@@ -12,9 +12,38 @@
     --red: #C1121F;
     --ink: #1a1a1a;
     --muted: #999;
+    --bg: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --text-secondary: #555;
+    --border: var(--ink);
   }
 
-  body { font-family: var(--font); font-size: 11px; color: var(--ink); background: #fff; }
+  body.dark {
+    --ink: #e8e8e8;
+    --muted: #777;
+    --bg: #111111;
+    --bg-secondary: #1e1e1e;
+    --text-secondary: #aaa;
+    --red: #e03040;
+  }
+
+  /* DARK MODE TOGGLE */
+  .dark-toggle {
+    background: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    align-self: start;
+  }
+  .dark-toggle:hover { background: var(--ink); color: var(--bg); }
+
+  body { font-family: var(--font); font-size: 11px; color: var(--ink); background: var(--bg); transition: background 0.2s, color 0.2s; }
 
   /* HERO */
   .hero {
@@ -25,9 +54,10 @@
     gap: 28px;
     align-items: end;
   }
+  .hero-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 12px; align-self: stretch; }
   .hero-label { font-size: 8px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
   h1 { font-size: 34px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; text-transform: uppercase; }
-  .hero-desc { font-size: 11px; line-height: 1.75; color: #555; margin-top: 13px; }
+  .hero-desc { font-size: 11px; line-height: 1.75; color: var(--text-secondary); margin-top: 13px; }
   .wa-box { width: 88px; height: 88px; border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; font-size: 42px; flex-shrink: 0; }
 
   /* TABS */
@@ -37,8 +67,9 @@
     padding: 10px 16px; cursor: pointer; font-family: var(--font); font-size: 9px; font-weight: 700;
     letter-spacing: 0.07em; text-transform: uppercase;
   }
-  .tab.active { background: var(--ink); color: #fff; }
-  .tab:hover:not(.active) { background: #f5f5f5; }
+  .tab.active { background: var(--ink); color: var(--bg); }
+  .tab:hover:not(.active) { background: var(--bg-secondary); }
+  body.dark .tab.active { background: #ffffff; color: #111111; }
 
   /* PANELS */
   .panel { display: none; padding: 24px 28px 36px; }
@@ -48,13 +79,13 @@
   .phase-title { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase; }
   .phase-time { font-size: 9px; color: var(--red); letter-spacing: 0.07em; font-weight: 700; }
   .phase-subtitle { font-size: 8px; color: var(--muted); letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 12px; }
-  .phase-desc { font-size: 11px; line-height: 1.8; color: #444; margin-bottom: 20px; }
+  .phase-desc { font-size: 11px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 20px; }
 
   /* RESOURCES */
-  .resources-label { font-size: 8px; letter-spacing: 0.1em; color: #bbb; text-transform: uppercase; }
+  .resources-label { font-size: 8px; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
   .resource { border-top: 1px solid var(--ink); padding: 10px 0; cursor: pointer; }
   .resource-row { display: flex; align-items: flex-start; gap: 10px; }
-  .resource-num { font-size: 9px; color: #bbb; padding-top: 1px; width: 15px; flex-shrink: 0; }
+  .resource-num { font-size: 9px; color: var(--muted); padding-top: 1px; width: 15px; flex-shrink: 0; }
   .resource-body { flex: 1; }
   .resource-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
   .resource-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -66,17 +97,17 @@
   .resource-time { font-size: 9px; color: var(--muted); white-space: nowrap; padding-top: 1px; }
   .resource-source { font-size: 9px; color: var(--muted); margin-top: 2px; }
   .resource-why { display: none; margin-top: 8px; }
-  .resource-why p { font-size: 10.5px; line-height: 1.7; color: #555; margin-bottom: 6px; }
+  .resource-why p { font-size: 10.5px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 6px; }
   .resource-why a { font-size: 9px; color: var(--red); text-decoration: none; font-weight: 700; letter-spacing: 0.03em; }
   .resource-why a:hover { text-decoration: underline; }
   .resource-divider { border-top: 1px solid var(--ink); }
 
   /* BUTTONS */
   .nav-buttons { display: flex; justify-content: space-between; }
-  .btn { background: none; border: 1px solid var(--ink); padding: 8px 16px; font-family: var(--font); font-size: 9px; font-weight: 700; cursor: pointer; letter-spacing: 0.06em; }
-  .btn:hover { background: #f5f5f5; }
-  .btn.primary { background: var(--ink); color: #fff; }
-  .btn.primary:hover { background: #333; }
+  .btn { background: none; border: 1px solid var(--ink); color: var(--ink); padding: 8px 16px; font-family: var(--font); font-size: 9px; font-weight: 700; cursor: pointer; letter-spacing: 0.06em; }
+  .btn:hover { background: var(--bg-secondary); }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.primary:hover { background: var(--text-secondary); }
   .btn:disabled { opacity: 0.15; cursor: not-allowed; }
   .btn:disabled:hover { background: none; }
 
@@ -94,7 +125,7 @@
   .tip { padding: 14px 15px; border-right: 1px solid var(--ink); }
   .tip:last-child { border-right: none; }
   .tip-num { font-size: 8px; color: var(--red); font-weight: 700; letter-spacing: 0.07em; margin-bottom: 5px; }
-  .tip p { font-size: 10px; line-height: 1.65; color: #555; }
+  .tip p { font-size: 10px; line-height: 1.65; color: var(--text-secondary); }
 </style>
 </head>
 <body>
@@ -110,7 +141,10 @@
       Install this first. Tatemae, omotenashi, ma, shoganai. All downstream of it.
     </p>
   </div>
-  <div class="wa-box">和</div>
+  <div class="hero-right">
+    <button class="dark-toggle" onclick="toggleDark()" id="theme-btn">◑ DARK</button>
+    <div class="wa-box">和</div>
+  </div>
 </div>
 
 <!-- TABS -->
@@ -384,6 +418,15 @@
 </div>
 
 <script>
+  function toggleDark() {
+    const dark = document.body.classList.toggle('dark');
+    document.getElementById('theme-btn').textContent = dark ? '◐ LIGHT' : '◑ DARK';
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+    document.getElementById('theme-btn').textContent = '◐ LIGHT';
+  }
   function switchTab(i) {
     document.querySelectorAll('.tab').forEach((t, j) => t.classList.toggle('active', i === j));
     document.querySelectorAll('.panel').forEach((p, j) => p.classList.toggle('active', i === j));
